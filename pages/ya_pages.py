@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
-PYTHON_URL = 'http://www.ya.ru'
+YA_URL = 'http://www.ya.ru'
 
 
 class YaPage:
@@ -29,7 +29,7 @@ class YaPage:
             # WebDriverWait по умолчанию опрашивает элемент с шагом 0.5 сек
             # и если время time_to_wait истекло - возбуждает исключение
             elem = WebDriverWait(driver, time_to_wait).until(
-                EC.presence_of_element_located(locator))
+                EC.element_to_be_clickable(locator))
             elem.click()
         except TimeoutException:
             raise TimeoutException(f'Время {time_to_wait} истекло')
@@ -42,8 +42,8 @@ class YaPage:
         self.click_to_element(YaPageLocators.SEARCH_BUTTON, 5)
 
     def open_page(self) -> None:
-        """Метод для перехода на страницу по адресу PYTHON_URL."""
-        self.driver.get(PYTHON_URL)
+        """Метод для перехода на страницу по адресу YA_URL."""
+        self.driver.get(YA_URL)
 
     def quit_driver(self) -> None:
         """Метод, который закрывает все окна и процессы вебдрайвера."""
